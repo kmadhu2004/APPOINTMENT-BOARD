@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Appointment Board</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <header class="header">
+            <div>
+                <h1>Appointment Board</h1>
+                <p>Manage your team's appointments efficiently</p>
+            </div>
+
+            <button class="primary-btn" id="addAppointmentBtn">
+                + Add Appointment
+            </button>
+        </header>
+
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <span>Total Appointments</span>
+                <h2 id="totalCount">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>Scheduled</span>
+                <h2 id="scheduledCount">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>Completed</span>
+                <h2 id="completedCount">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>Cancelled</span>
+                <h2 id="cancelledCount">0</h2>
+            </div>
+
+        </section>
+
+
+        <section class="filters">
+
+            <div>
+                <label for="dateFilter">Filter by Date</label>
+
+                <input type="date" id="dateFilter">
+            </div>
+
+
+            <div>
+                <label for="statusFilter">Filter by Status</label>
+
+                <select id="statusFilter">
+                    <option value="all">All Status</option>
+                    <option value="scheduled">Scheduled</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+
+
+            <button class="secondary-btn" id="clearFilters">
+                Clear Filters
+            </button>
+
+        </section>
+
+
+        <section>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Appointments</h2>
+                    <p id="appointmentResultText">
+                        View and manage all appointments
+                    </p>
+                </div>
+            </div>
+
+
+            <div id="appointmentList" class="appointment-grid">
+            </div>
+
+
+            <div id="emptyState" class="empty-state hidden">
+
+                <div class="empty-icon">📅</div>
+
+                <h3>No appointments found</h3>
+
+                <p>
+                    Try changing the filters or create a new appointment.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <div class="modal hidden" id="appointmentModal">
+
+        <div class="modal-overlay" id="modalOverlay"></div>
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2 id="modalTitle">Add Appointment</h2>
+                    <p>Enter the appointment details below.</p>
+                </div>
+
+                <button type="button" class="close-btn" id="closeModal">
+                    &times;
+                </button>
+
+            </div>
+
+
+            <form id="appointmentForm">
+
+                <input type="hidden" id="appointmentId">
+
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Title <span>*</span>
+                    </label>
+
+                    <input type="text" id="title" placeholder="Example: Client Meeting" maxlength="60" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <textarea id="description" rows="3" maxlength="200" placeholder="Add a short description..."></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="appointmentDate">
+                        Date <span>*</span>
+                    </label>
+
+                    <input type="date" id="appointmentDate" required>
+
+                </div>
+
+
+                <div class="time-row">
+
+                    <div class="form-group">
+
+                        <label for="startTime">
+                            Start Time <span>*</span>
+                        </label>
+
+                        <input type="time" id="startTime" required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="endTime">
+                            End Time <span>*</span>
+                        </label>
+
+                        <input type="time" id="endTime" required>
+
+                    </div>
+
+                </div>
+
+
+                <div id="formError" class="form-error hidden"></div>
+
+
+                <div class="modal-actions">
+
+                    <button type="button" class="secondary-btn" id="cancelModalBtn">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="primary-btn">
+                        Save Appointment
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="modal hidden" id="confirmModal">
+
+        <div class="modal-overlay"></div>
+
+        <div class="confirm-box">
+
+            <div class="confirm-icon">!</div>
+
+            <h2>Cancel Appointment?</h2>
+
+            <p>
+                This appointment will remain visible but will be marked
+                as cancelled.
+            </p>
+
+            <div class="modal-actions">
+
+                <button class="secondary-btn" id="keepAppointmentBtn">
+                    Keep Appointment
+                </button>
+
+                <button class="danger-btn" id="confirmCancelBtn">
+                    Cancel Appointment
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

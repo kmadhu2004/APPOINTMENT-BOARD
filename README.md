@@ -33,6 +33,3 @@ APPOINTMENT-BOARD/
 ─ style.css
 ─ script.js
 ─ README.md
-├── style.css
-├── script.js
-└── README.md
